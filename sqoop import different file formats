@@ -1,0 +1,37 @@
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table orders \
+--target-dir /user/cloudera/subha_practice/Aug_18/sqoop_import_sequence \
+--as-sequencefile
+
+
+
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table orders \
+--target-dir /user/cloudera/subha_practice/Aug_18/sqoop_import_text \
+--as-textfile
+
+
+
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table orders \
+--target-dir /user/cloudera/subha_practice/Aug_18/sqoop_import_avro \
+--as-avrodatafile
+
+
+
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table orders \
+--target-dir /user/cloudera/subha_practice/Aug_18/sqoop_import_parquet \
+--as-parquetfile
