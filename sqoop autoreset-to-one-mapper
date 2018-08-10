@@ -1,0 +1,6 @@
+sqoop import-all-tables \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--warehouse-dir /user/cloudera/subha_practice/sqoop_import_all_tables \
+--autoreset-to-one-mapper
