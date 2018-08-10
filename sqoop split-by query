@@ -4,10 +4,10 @@
 
 
 
-sqoop import 
---connect jdbc:mysql://quickstart.cloudera:3306/retail_db 
---username retail_dba 
---password cloudera 
---target-dir /user/cloudera/subha_practice/Aug_18/orders_nopk_split 
---query "select * from orders_nopk where (order_id >= 1 and order_id < 17220) and \$CONDITIONS" 
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \ 
+--username retail_dba \
+--password cloudera \
+--target-dir /user/cloudera/subha_practice/Aug_18/orders_nopk_split \ 
+--query "select * from orders_nopk where (order_id >= 1 and order_id < 17220) and \$CONDITIONS" \
 --split-by order_id
