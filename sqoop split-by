@@ -1,0 +1,20 @@
+--cretate table without primary key
+mysql> create table orders_nopk as select * from orders;
+mysql> describe orders_nopk;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| order_id          | int(11)     | NO   |     | 0       |       |
+| order_date        | datetime    | NO   |     | NULL    |       |
+| order_customer_id | int(11)     | NO   |     | NULL    |       |
+| order_status      | varchar(45) | NO   |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \ 
+--password cloudera \ 
+--table orders_nopk \
+--target-dir /user/cloudera/subha_practice/Aug_18/orders_nopk \ 
+--split-by order_id
