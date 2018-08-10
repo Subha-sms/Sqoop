@@ -1,0 +1,7 @@
+sqoop import \ 
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \ 
+--username retail_dba \
+--password cloudera \
+--target-dir /user/cloudera/subha_practice/Aug_18/orders_nopk_split_by_text \ 
+--table orders_nopk  \
+--split-by order_status
