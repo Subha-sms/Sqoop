@@ -1,0 +1,29 @@
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \ 
+--username retail_dba \
+--password cloudera \
+--table orders \
+--target-dir /user/cloudera/subha_practice/Aug_18/sqoop_import_snappy \
+--compress \
+--compression-codec org.apache.hadoop.io.compress.SnappyCodec \
+
+
+
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \ 
+--username retail_dba \
+--password cloudera \
+--table orders \
+--target-dir /user/cloudera/subha_practice/Aug_18/sqoop_import_bzip2 \
+--compress \
+--compression-codec org.apache.hadoop.io.compress.BZip2Codec 
+
+
+qoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \ 
+--username retail_dba \
+--password cloudera \
+--table orders \
+--target-dir /user/cloudera/subha_practice/Aug_18/sqoop_import_gzip \
+--compress \
+--compression-codec org.apache.hadoop.io.compress.GzipCodec 
