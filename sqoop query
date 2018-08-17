@@ -1,0 +1,7 @@
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--query "select * from orders where order_status = 'PENDING_PAYMENT' and \$CONDITIONS" \
+--target-dir /user/cloudera/subha_practice/Aug_18/query \
+--split-by order_status
