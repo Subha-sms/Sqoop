@@ -1,0 +1,7 @@
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba --password cloudera \
+--table orders \
+--target-dir /user/cloudera/subha_practice/Aug_18/column \
+--columns order_id,order_status \
+--where "order_id > 10000 and order_status = 'CLOSED'" 
