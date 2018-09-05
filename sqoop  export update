@@ -1,0 +1,84 @@
+select * from employee_e_update;
++------+---------+--------+
+| id   | fname   | lname  |
++------+---------+--------+
+|    1 | vanitha | seenu  |
+|    2 | anitha  | dinesh |
+|    3 | anitha  | vimal  |
+|    4 | kavitha | tanvir |
++------+---------+--------+
+
+sqoop import \ 
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table employee_e_update \
+--target-dir /user/cloudera/subha_practice/Aug_18/employee_e1 -m 1
+
+[cloudera@quickstart ~]$ hadoop fs -cat /user/cloudera/subha_practice/Aug_18/employee_e1/part-m-00000;
+1,vanitha,seenu
+2,anitha,dinesh
+3,anitha,vimal
+4,kavitha,tanvir
+
+create table employee_export_update(id int primary key,fname varchar(25),lname varchar(30));
+
+sqoop export \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--export-dir /user/cloudera/subha_practice/Aug_18/employee_e1 \
+--table employee_export_update -m 1
+
+select * from employee_export_update;
++----+---------+--------+
+| id | fname   | lname  |
++----+---------+--------+
+|  1 | vanitha | seenu  |
+|  2 | anitha  | dinesh |
+|  3 | anitha  | vimal  |
+|  4 | kavitha | tanvir |
++----+---------+--------+
+
+insert into employee_e_update values(5,'savitha','vijay');
+
+select * from employee_e_update;
++------+---------+--------+
+| id   | fname   | lname  |
++------+---------+--------+
+|    1 | vanitha | seenu  |
+|    2 | anitha  | dinesh |
+|    3 | anitha  | vimal  |
+|    4 | kavitha | tanvir |
+|    5 | savitha | vijay  |
++------+---------+--------+
+
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table employee_e_update \
+--target-dir /user/cloudera/subha_practice/Aug_18/employee_e2 \
+-m 1
+
+sqoop export \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--export-dir /user/cloudera/subha_practice/Aug_18/employee_e2 \
+--table employee_export_update \
+-m 1 \
+--update-key id \
+--update-mode allowinsert
+
+select * from employee_export_update;
++----+---------+--------+
+| id | fname   | lname  |
++----+---------+--------+
+|  1 | vanitha | seenu  |
+|  2 | anitha  | dinesh |
+|  3 | anitha  | vimal  |
+|  4 | kavitha | tanvir |
+|  5 | savitha | vijay  |
++----+---------+--------+
+
