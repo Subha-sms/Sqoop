@@ -1,0 +1,13 @@
+sqoop job --create job_01 \
+ -- import \
+ --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+ --username retail_dba \
+ --password cloudera \
+ --table orders \
+ --target-dir /user/cloudera/subha_practice/Sep_18/sqoop_job_create
+ 
+ Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+18/09/19 07:45:40 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0
+18/09/19 07:45:41 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.
+
