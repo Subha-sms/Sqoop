@@ -1,0 +1,4 @@
+sqoop job --exec job_01
+
+18/09/19 07:47:26 INFO mapreduce.ImportJobBase: Transferred 2.861 MB in 48.6652 seconds (60.1998 KB/sec)
+18/09/19 07:47:26 INFO mapreduce.ImportJobBase: Retrieved 68883 records.
