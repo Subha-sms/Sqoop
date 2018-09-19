@@ -1,0 +1,15 @@
+sqoop job --list
+
+Warning: /usr/lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
+Please set $ACCUMULO_HOME to the root of your Accumulo installation.
+18/09/19 07:58:58 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0
+Available jobs:
+  first_sqoop_job
+  job_01
+  job_1
+  my_second_sqoop_job
+  my_sqoop_job
+  p_20_job
+  problem_20_job
+  problem_5_first_job
+  problem_5_hive_job
