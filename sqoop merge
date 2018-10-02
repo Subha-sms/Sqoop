@@ -1,0 +1,18 @@
+select * from department_merge;
++---------------+-----------------+
+| department_id | department_name |
++---------------+-----------------+
+|             1 | CSE             |
+|             2 | IT              |
+|             3 | EEE             |
+|             4 | ECE             |
+|             5 | MECH            |
++---------------+-----------------+
+
+
+sqoop import \
+> --connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+> --username retail_dba \
+> --password cloudera \
+> --table department_merge \
+> --target-dir /user/cloudera/subha_practice/Oct_18/sqoop_import_dept
