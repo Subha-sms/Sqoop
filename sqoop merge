@@ -1,3 +1,9 @@
+//Things to remember
+In merge there is no arguments such as connece,username,password
+jar file--get it from your last import
+class name name of jar file(ex if jar file name is dept.jar,then class name is dept)
+
+
 select * from department_merge;
 +---------------+-----------------+
 | department_id | department_name |
@@ -16,3 +22,60 @@ sqoop import \
 > --password cloudera \
 > --table department_merge \
 > --target-dir /user/cloudera/subha_practice/Oct_18/sqoop_import_dept
+
+hadoop fs -cat /user/cloudera/subha_practice/Oct_18/sqoop_import_dept/part*
+1,CSE
+2,IT
+3,EEE
+4,ECE
+5,MECH
+
+
+upadte and insert into department_merge
+update department_merge set department_name='MECH_MERGE_UPDATE' where department_id=5;
+insert into department_merge values(6,'MECH_MERGE_INSERT');
+
+select * from department_merge;
++---------------+-------------------+
+| department_id | department_name   |
++---------------+-------------------+
+|             1 | CSE               |
+|             2 | IT                |
+|             3 | EEE               |
+|             4 | ECE               |
+|             5 | MECH_MERGE_UPDATE |
+|             6 | MECH_MERGE_INSERT |
++---------------+-------------------+
+6 rows in set (0.00 sec)
+
+//Incremental import
+
+sqoop import \
+--connect jdbc:mysql://quickstart.cloudera:3306/retail_db \
+--username retail_dba \
+--password cloudera \
+--table department_merge \
+--target-dir /user/cloudera/subha_practice/Oct_18/sqoop_import_dept_delta \
+--incremental append \
+--check-column department_id \
+--last-value 4
+
+hadoop fs -cat /user/cloudera/subha_practice/Oct_18/sqoop_import_dept_delta/part*
+5,MECH_MERGE_UPDATE
+6,MECH_MERGE_INSERT
+
+sqoop merge
+--merge-key department_id 
+--target-dir /user/cloudera/subha_practice/OCt_18/merge 
+--onto /user/cloudera/subha_practice/Oct_18/sqoop_import_dept
+--new-data /user/cloudera/subha_practice/Oct_18/sqoop_import_dept_delta 
+--class-name department_merge 
+--jar-file /tmp/sqoop-cloudera/compile/6795893e3587ddb2611397d551980d80/department_merge.jar
+
+hadoop fs -cat /user/cloudera/subha_practice/OCt_18/merge/part-r-00000
+1,CSE
+2,IT
+3,EEE
+4,ECE
+5,MECH_MERGE_UPDATE
+6,MECH_MERGE_INSERT
